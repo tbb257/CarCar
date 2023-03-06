@@ -29,12 +29,16 @@ def get_manu_model_auto():
         models = json.loads(data.content)
 
         for model in models["models"]:
+            manufacturer = ManufacturerVO.objects.get(
+                name=model["manufacturer"]["name"]
+            )
+
             VehicleModelVO.objects.update_or_create(
                 import_href=model["href"],
                 defaults={
                     "name": model["name"],
                     "picture_url": model["picture_url"],
-                    "manufacturer_id": model["manufacturer_id"],
+                    "manufacturer": manufacturer,
                 },
             )
 
@@ -43,13 +47,15 @@ def get_manu_model_auto():
         autos = json.loads(data.content)
 
         for auto in autos["autos"]:
+            model = VehicleModelVO.objects.get(name=auto["model"]["name"])
+
             AutomobileVO.objects.update_or_create(
                 import_href=auto["href"],
                 defaults={
                     "color": auto["color"],
                     "year": auto["year"],
                     "vin": auto["vin"],
-                    "model_id": auto["model_id"],
+                    "model": model,
                 },
             )
 
