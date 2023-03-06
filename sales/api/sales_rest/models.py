@@ -57,3 +57,21 @@ class AutomobileVO(models.Model):
         return reverse("api_automobile", kwargs={"vin": self.vin})
     def __str__(self):
         return self.vin
+
+class SalesRecord(models.Model):
+    automobile = models.ForeignKey(
+        AutomobileVO,
+        related_name = "automobile",
+        on_delete = models.CASCADE
+    )
+    salesperson = models.ForeignKey(
+        SalesPerson,
+        related_name = "salesperson",
+        on_delete = models.CASCADE
+    )
+    customer = models.ForeignKey(
+        Customer,
+        related_name = "customer",
+        on_delete = models.CASCADE
+    )
+    price = models.IntegerField()
