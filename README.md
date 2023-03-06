@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Shaun Ragasa - Services Microservice
+* Person 2 - Sales Microservice
 
 ## Design
 
