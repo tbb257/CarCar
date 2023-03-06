@@ -7,6 +7,8 @@ class Manufacturer(models.Model):
 
     def get_api_url(self):
         return reverse("api_manufacturer", kwargs={"pk": self.id})
+    def __str__(self):
+        return self.name
 
 
 class VehicleModel(models.Model):
@@ -21,6 +23,8 @@ class VehicleModel(models.Model):
 
     def get_api_url(self):
         return reverse("api_vehicle_model", kwargs={"pk": self.id})
+    def __str__(self):
+        return self.name
 
 
 class Automobile(models.Model):
@@ -36,3 +40,5 @@ class Automobile(models.Model):
 
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"vin": self.vin})
+    def __str__(self):
+        return self.vin

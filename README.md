@@ -3,7 +3,7 @@
 Team:
 
 * Shaun Ragasa - Services Microservice
-* Person 2 - Sales Microservice
+* Tahmid - Sales Microservice
 
 ## Design
 
