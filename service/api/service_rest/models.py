@@ -65,6 +65,13 @@ class Status(models.Model):
 
 
 class ServiceAppointment(models.Model):
+    @classmethod
+    def create(cls, **kwargs):
+        kwargs["status"] = Status.objects.get(name="IN PROGRESS")
+        serviceappointment = cls(**kwargs)
+        serviceappointment.save()
+        return serviceappointment
+
     vin = models.CharField(max_length=17)
     customer_name = models.CharField(max_length=100)
     reason = models.TextField()
@@ -97,7 +104,7 @@ class ServiceAppointment(models.Model):
         self.save()
 
     def cancel(self):
-        status = Status.objects.get(name="CANCELLED")
+        status = Status.objects.get(name="CANCELED")
         self.status = status
         self.save()
 

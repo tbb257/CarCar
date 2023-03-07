@@ -38,3 +38,8 @@ class StatusAdmin(admin.ModelAdmin):
 @admin.register(ServiceAppointment)
 class ServiceAppointmentAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Status)
+class StatusAdmin(admin.ModelAdmin):
+    pass
