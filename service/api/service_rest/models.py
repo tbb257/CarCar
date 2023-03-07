@@ -78,23 +78,18 @@ class ServiceAppointment(models.Model):
         on_delete=models.PROTECT,
     )
 
-    @classmethod
-    def create(cls, **kwargs):
-        kwargs["status"] = Status.objects.get(name="IN PROGRESS")
-        serviceappointment = cls(**kwargs)
-        serviceappointment.save()
-        return serviceappointment
-
     status = models.ForeignKey(
         Status,
         related_name="appointments",
         on_delete=models.PROTECT,
     )
 
-    # def progress(self):
-    #     status = Status.objects.get(name="IN PROGRESS")
-    #     self.status = status
-    #     self.save()
+    @classmethod
+    def create(cls, **kwargs):
+        kwargs["status"] = Status.objects.get(name="IN PROGRESS")
+        serviceappointment = cls(**kwargs)
+        serviceappointment.save()
+        return serviceappointment
 
     def finish(self):
         status = Status.objects.get(name="FINISHED")
