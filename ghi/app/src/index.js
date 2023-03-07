@@ -18,8 +18,6 @@ async function loadSalesAndService(){
     const dataSales = await responseSales.json();
     const dataService = await responseService.json();
 
-    console.log(dataSales)
-    console.log(dataService)
 
     root.render(
       <React.StrictMode>
