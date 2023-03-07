@@ -12,7 +12,8 @@ import VehicleList from './components/inventory/VehicleList';
 import VehicleForm from './components/inventory/VehicleForm';
 import AutomobileList from './components/inventory/AutomobileList';
 import AutomobileForm from './components/inventory/AutomobileForm';
-
+import AppointmentForm from './components/service/AppointmentForm';
+import AppointmentList from './components/service/AppointmentList';
 
 
 function App(props) {
@@ -42,6 +43,10 @@ function App(props) {
           <Route path="/salesperson">
             <Route index element={<SalesPersonDetail/>}/>
             <Route path="create" element={<SalesPersonForm/>}/>
+          </Route>
+          <Route path="service">
+            <Route index element={<AppointmentList/>}/>
+            <Route path="create" element={<AppointmentForm/>}/>
           </Route>
         </Routes>
       </div>
