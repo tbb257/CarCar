@@ -71,7 +71,6 @@ class ServiceAppointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     vip = models.BooleanField(default=False)
-    status = models.CharField(blank=True)
 
     technician = models.ForeignKey(
         Technician,
