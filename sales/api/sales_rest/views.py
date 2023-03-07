@@ -41,7 +41,7 @@ class VehicleModelEncoder(ModelEncoder):
     model = VehicleModelVO
     properties = [
         "name",
-        "picturel_url",
+        "picture_url",
         "import_href",
     ]
 
