@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import CustomerForm from './CustomerForm';
-import CustomerList from './CustomerList';
+import CustomerForm from './components/sales/CustomerForm';
+import CustomerList from './components/sales/CustomerList';
 
 function App() {
   return (
