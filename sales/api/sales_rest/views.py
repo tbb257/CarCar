@@ -177,14 +177,12 @@ def api_sales(request):
         response = SalesRecord.objects.all()
         return JsonResponse({"sales":response},encoder=SalesRecordListEncoder, safe=False)
     else:
+        content = json.loads(request.body)
+
+        automobile_vin = content["automobile_vin"]
+        salesperson_name = content["salesperson_name"]
+        customer_name = content["customer_name"]
         try:
-            content = json.loads(request.body)
-
-            automobile_vin = content["automobile_vin"]
-            salesperson_name = content["salesperson_name"]
-            customer_name = content["customer_name"]
-
-
             automobile = AutomobileVO.objects.get(vin=automobile_vin)
             salesperson = SalesPerson.objects.get(name=salesperson_name)
             customer = Customer.objects.get(name=customer_name)

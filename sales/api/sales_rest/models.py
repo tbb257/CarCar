@@ -61,17 +61,17 @@ class AutomobileVO(models.Model):
 class SalesRecord(models.Model):
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name = "automobile",
+        related_name = "salesrecord",
         on_delete = models.CASCADE
     )
     salesperson = models.ForeignKey(
         SalesPerson,
-        related_name = "salesperson",
+        related_name = "salesrecord",
         on_delete = models.CASCADE
     )
     customer = models.ForeignKey(
         Customer,
-        related_name = "customer",
+        related_name = "salesrecord",
         on_delete = models.CASCADE
     )
     price = models.IntegerField()
