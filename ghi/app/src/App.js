@@ -6,6 +6,14 @@ import SalesList from './components/sales/SalesList';
 import SalesForm from './components/sales/SalesForm';
 import SalesPersonDetail from './components/sales/SalesPersonDetail';
 import SalesPersonForm from './components/sales/SalesPersonForm';
+import ManufacturerList from './components/inventory/ManufacturerList';
+import ManufacturerForm from './components/inventory/ManufacturerForm';
+import VehicleList from './components/inventory/VehicleList';
+import VehicleForm from './components/inventory/VehicleForm';
+import AutomobileList from './components/inventory/AutomobileList';
+import AutomobileForm from './components/inventory/AutomobileForm';
+
+
 
 function App(props) {
   return (
@@ -14,6 +22,18 @@ function App(props) {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="manufacturers">
+            <Route index element={<ManufacturerList/>}/>
+            <Route path="create" element={<ManufacturerForm/>}/>
+          </Route>
+          <Route path="vehicles">
+            <Route index element={<VehicleList/>}/>
+            <Route path="create" element={<VehicleForm/>}/>
+          </Route>
+          <Route path="automobiles">
+            <Route index element={<AutomobileList/>}/>
+            <Route path="create" element={<AutomobileForm/>}/>
+          </Route>
           <Route path="/customers/create" element={<CustomerForm/>}/>
           <Route path="/sales">
             <Route index element={<SalesList sales={props.sales}/>}/>
