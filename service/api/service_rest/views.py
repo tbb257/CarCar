@@ -155,7 +155,7 @@ def api_appointments(request):
                 {"message": "Invalid technician employee number"}, status=400
             )
 
-        appointment = ServiceAppointment.objects.create(**content)
+        appointment = ServiceAppointment.create(**content)
 
         return JsonResponse(appointment, encoder=ServiceAppointmentEncoder, safe=False)
 

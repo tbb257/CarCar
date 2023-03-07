@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ManufacturerVO, VehicleModelVO, AutomobileVO
+from .models import ManufacturerVO, VehicleModelVO, AutomobileVO, Status
 
 
 @admin.register(ManufacturerVO)
@@ -18,4 +18,8 @@ class VehicleModelVOAdmin(admin.ModelAdmin):
 @admin.register(AutomobileVO)
 class AutomobileVOAdmin(admin.ModelAdmin):
     # list_display = ("color", "year", "vin")
+    pass
+
+@admin.register(Status)
+class StatusAdmin(admin.ModelAdmin):
     pass
