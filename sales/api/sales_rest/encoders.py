@@ -6,7 +6,8 @@ class SalesPeopleEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
         "name",
-        "id"
+        "id",
+        "employee_number",
     ]
 class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson

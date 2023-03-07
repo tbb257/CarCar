@@ -9,9 +9,6 @@ from .encoders import (
     SalesPersonEncoder,
     CustomerListEncoder,
     CustomerDetailEncoder,
-    VehicleModelEncoder,
-    AutomobileListEncoder,
-    AutomobileDetailEncoder,
     SalesRecordListEncoder,
     SalesRecordDetailEncoder
 )
