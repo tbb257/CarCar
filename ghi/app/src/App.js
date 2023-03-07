@@ -14,7 +14,7 @@ function App(props) {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/customer/create" element={<CustomerForm/>}/>
+          <Route path="/customers/create" element={<CustomerForm/>}/>
           <Route path="/sales">
             <Route index element={<SalesList sales={props.sales}/>}/>
             <Route path="create" element={<SalesForm/>}/>
