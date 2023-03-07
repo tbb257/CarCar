@@ -62,22 +62,24 @@ class AutomobileDetailEncoder(ModelEncoder):
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
     properties = [
+        "id",
         "salesperson",
         "customer",
-        "id",
         "price",
+        "automobile"
     ]
     encoders = {
         "salesperson":SalesPeopleEncoder(),
         "customer":CustomerListEncoder(),
+        "automobile":AutomobileListEncoder()
     }
 
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord
     properties = [
+        "id",
         "salesperson",
         "customer",
-        "id",
         "automobile",
         "price",
     ]
@@ -179,25 +181,46 @@ def api_sales(request):
     else:
         content = json.loads(request.body)
 
-        automobile_vin = content["automobile_vin"]
-        salesperson_name = content["salesperson_name"]
-        customer_name = content["customer_name"]
+        automobile = content["automobile"]
+        salesperson = content["salesperson"]
+        customer = content["customer"]
         try:
-            automobile = AutomobileVO.objects.get(vin=automobile_vin)
-            salesperson = SalesPerson.objects.get(name=salesperson_name)
-            customer = Customer.objects.get(name=customer_name)
+            automobileVO = AutomobileVO.objects.get(vin=automobile)
+            salespersonVO = SalesPerson.objects.get(name=salesperson)
+            customerVO = Customer.objects.get(name=customer)
 
 
-            content["automobile"]=automobile
-            content["salesperson"]=salesperson
-            content["customer"]=customer
+            content["automobile"]=automobileVO
+            content["salesperson"]=salespersonVO
+            content["customer"]=customerVO
             sales = SalesRecord.objects.create(**content)
             return JsonResponse(sales, encoder=SalesRecordListEncoder, safe=False)
         except AutomobileVO.DoesNotExist:
-            return JsonResponse({"error":"check if Automobile vin exists"})
+            return JsonResponse({"error":"Make sure autombile is vin number, and check if Automobile vin exists"})
         except SalesPerson.DoesNotExist:
-            return JsonResponse({"error":"check if SalesPerson exists"})
+            return JsonResponse({"error":"Make sure salesperson is the name and check if SalesPerson exists"})
         except Customer.DoesNotExist:
-            return JsonResponse({"error":"check if customer exists"})
+            return JsonResponse({"error":"Make sure customer is the name and check if customer exists"})
 
-        ##Still need to figure out create feature
+
+
+@require_http_methods(["GET", "DELETE","POST"])
+def api_sale(request, id):
+    if request.method == "GET":
+        response = SalesRecord.objects.get(id=id)
+        return JsonResponse(response, encoder=SalesRecordDetailEncoder, safe=False)
+    elif request.method == "DELETE":
+        try:
+            sale = SalesRecord.objects.get(id=id)
+            sale.delete()
+            return JsonResponse({"Deletion":"Successful"},safe=False)
+        except SalesRecord.DoesNotExist:
+            return JsonResponse({"Error":"Does not Exist"})
+    else:
+        try:
+            content = json.loads(request.body)
+            SalesRecord.objects.filter(id=id).update(**content)
+            sale = SalesRecord.objects.get(id=id)
+            return JsonResponse(sale,encoder = SalesRecordDetailEncoder,safe=False)
+        except:
+            return JsonResponse({"Error":"Try again"})

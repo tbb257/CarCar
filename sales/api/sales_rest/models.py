@@ -75,3 +75,6 @@ class SalesRecord(models.Model):
         on_delete = models.CASCADE
     )
     price = models.IntegerField()
+
+    def __str__(self):
+        return f"SalesPerson - {self.salesperson} / Customer - {self.customer} / Price - {self.price}"
