@@ -37,7 +37,8 @@ def api_detail_technicians(request, id):
                         "successful": count > 0,
                         "message": "Technician could not be deleted. Either invalid technician employee number or technician has already been deleted.",
                     }
-                }
+                },
+                status=404,
             )
     else:
         content = json.loads(request.body)
@@ -80,7 +81,8 @@ def api_detail_statuses(request, name):
                         "successful": count > 0,
                         "message": "Status could not be deleted. Either invalid status name or status has already been deleted.",
                     }
-                }
+                },
+                status=404,
             )
 
 
@@ -103,7 +105,7 @@ def api_appointments(request):
             content["technician"] = technician
         except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid technician employee number"}, status=400
+                {"message": "Invalid technician employee number"}, status=404
             )
 
         vins = []
@@ -136,20 +138,39 @@ def api_detail_appointments(request, id):
                         "successful": count > 0,
                         "message": "Appointment could not be deleted. Either invalid appointment ID or appointment has already been deleted.",
                     }
-                }
+                },
+                status=404,
             )
     else:
         content = json.loads(request.body)
 
         if "technician" in content:
             try:
-                technician = Technician.objects.get(
-                    employee_num=content["technician number"]
-                )
+                technician = Technician.objects.get(employee_num=content["technician"])
                 content["technician"] = technician
             except Technician.DoesNotExist:
                 return JsonResponse(
-                    {"message": "Invalid technician employee number"}, status=400
+                    {"message": "Invalid technician employee number"}, status=404
+                )
+
+        if "status" in content:
+            try:
+                if content["status"] == "CANCELLED":
+                    appointment = ServiceAppointment.objects.get(id=id)
+                    appointment.cancel()
+                    del content["status"]
+                elif content["status"] == "FINISHED":
+                    appointment = ServiceAppointment.objects.get(id=id)
+                    appointment.finish()
+                    del content["status"]
+                else:
+                    raise ValueError
+            except ValueError:
+                return JsonResponse(
+                    {
+                        "message": "Invalid status name. Your options are 'CANCELLED' or 'FINISHED'."
+                    },
+                    status=404,
                 )
 
         ServiceAppointment.objects.filter(id=id).update(**content)
