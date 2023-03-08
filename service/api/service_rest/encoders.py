@@ -1,5 +1,4 @@
 from common.json import ModelEncoder
-
 from .models import (
     ManufacturerVO,
     VehicleModelVO,

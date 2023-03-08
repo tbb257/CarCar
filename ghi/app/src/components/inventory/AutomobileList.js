@@ -4,16 +4,16 @@ function AutomobileList() {
     const [automobiles, setAutomobiles] = useState([])
 
     const getData = async () => {
-      const response = await fetch("http://localhost:8100/api/automobiles/")
+        const response = await fetch("http://localhost:8100/api/automobiles/")
 
-      if (response.ok) {
-          const data = await response.json()
-          setAutomobiles(data.autos);
-      }
+        if (response.ok) {
+            const data = await response.json()
+            setAutomobiles(data.autos);
+        }
     }
 
     useEffect(() => {
-      getData();
+        getData();
     }, [])
 
 

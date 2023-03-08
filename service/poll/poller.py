@@ -9,7 +9,7 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "service_project.settings")
 django.setup()
 
-# Import models from service_rest, here.
+
 from service_rest.models import ManufacturerVO, VehicleModelVO, AutomobileVO
 
 
@@ -71,7 +71,7 @@ def poll():
             get_manu_model_auto()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(10)
+        time.sleep(60)
 
 
 if __name__ == "__main__":

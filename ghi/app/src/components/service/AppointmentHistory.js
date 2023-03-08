@@ -9,7 +9,7 @@ function AppointmentHistory(props) {
       setAppointments(props.appointments);
     }, [])
 
-    const handelFilterTermChange = (e) => {
+    const handleFilterTermChange = (e) => {
       setFilterTerm(e.target.value);
     }
 
@@ -21,23 +21,23 @@ function AppointmentHistory(props) {
       }
     }
 
-    const vip = (value) => {
-        if (value) {
+    const vip = (vip) => {
+        if (vip) {
             return <td>&#9745;</td>
         } else {
             return <td>&#9744;</td>
         }
     }
 
-    const date = (value) => {
-      let date = new Date(value)
-      return date.toDateString()
+    const date = (date) => {
+      let dateData = new Date(date)
+      return dateData.toDateString()
     }
 
-    const time = (value, value2) => {
-        let dateString = `${value}T${value2}`
-        let date = new Date(dateString)
-        return date.toLocaleTimeString()
+    const time = (date, time) => {
+        let dateString = `${date}T${time}`
+        let timeData = new Date(dateString)
+        return timeData.toLocaleTimeString()
     }
 
     return (
@@ -48,7 +48,7 @@ function AppointmentHistory(props) {
         <hr/>
         <form id="appointment_filter">
           <div className="row">
-            <input className="col-md-12" onChange={handelFilterTermChange} placeholder="Search by VIN"></input>
+            <input className="col-md-12" onChange={handleFilterTermChange} placeholder="Search by VIN"></input>
           </div>
         </form>
         <hr/>
