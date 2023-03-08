@@ -37,12 +37,12 @@ function SalesPersonList (props) {
 
 
     return (
-        <div>
+        <div className="shadow p-4 mt-4">
             <h1>Sales person history</h1>
             <form id="select-salesperson">
-                <div className="mb-3">
-                    <input onChange={handleFilterChange} value={filter }required id="salesperson" name="salesperson" className="form-select">
-                    </input>
+                <div className="form-floating mb-3">
+                    <input onChange={handleFilterChange} value={filter} placeholder="Search a Sales Person" required id="salesperson" name="salesperson" className="form-control"/>
+                    <label htmlFor="salesperson">Search a Sales Person</label>
                 </div>
             </form>
             <table className="table table-striped">
@@ -55,7 +55,7 @@ function SalesPersonList (props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {salesRecords.filter(transaction => transaction.salesperson.includes(filter)).map(transaction =>{
+                    {salesRecords.filter(transaction => transaction.salesperson.toUpperCase().includes(filter.toUpperCase())).map(transaction =>{
                         return (
                             <tr>
                                 <td>{transaction.salesperson}</td>
