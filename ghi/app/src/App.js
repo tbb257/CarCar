@@ -45,7 +45,7 @@ function App(props) {
             <Route path="create" element={<SalesPersonForm/>}/>
           </Route>
           <Route path="service">
-            <Route index element={<AppointmentList/>}/>
+            <Route index element={<AppointmentList appointments={props.service}/>}/>
             <Route path="create" element={<AppointmentForm/>}/>
           </Route>
         </Routes>

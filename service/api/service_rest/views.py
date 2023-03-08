@@ -3,7 +3,7 @@ from django.http import JsonResponse
 import json
 
 from .encoders import TechnicianEncoder, StatusEncoder, ServiceAppointmentEncoder
-from .models import Technician, Status, ServiceAppointment
+from .models import AutomobileVO, Technician, Status, ServiceAppointment
 
 
 @require_http_methods(["GET", "POST"])
@@ -105,6 +105,13 @@ def api_appointments(request):
             return JsonResponse(
                 {"message": "Invalid technician employee number"}, status=400
             )
+
+        vins = []
+        automobiles = AutomobileVO.objects.all()
+        for automobile in automobiles:
+            vins.append(automobile.vin)
+        if content["vin"] in vins:
+            content["vip"] = True
 
         appointment = ServiceAppointment.create(**content)
 

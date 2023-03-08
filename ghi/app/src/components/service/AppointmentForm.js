@@ -60,16 +60,23 @@ function AppointmentForm() {
         };
     };
 
+    const handleNewForm = (e) => {
+        setBool(false)
+    }
+
     let submitted = bool
     let formClass
     let successClass
+    let titleClass
 
     if (!(submitted)) {
         formClass = " ";
         successClass = "d-none"
+        titleClass = "py-2"
     } else {
         formClass = "d-none";
         successClass = "d-grid gap-2"
+        titleClass = "py-2 d-none"
     }
 
     return (
@@ -77,18 +84,20 @@ function AppointmentForm() {
         <div className="row">
             <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
-                <h1 className="py-2">Make a New Appointment Here!</h1>
+                <h1 className={titleClass} style={{textAlign:'center'}}>Make a New Appointment Here!</h1>
                 <div className={successClass}>
                     <div className="alert alert-success mb-0" id="success-message">
-                        Success! Appointment has been set.
+                        <h2 style={{textAlign:'center'}}>Success!</h2>
+                        <h5 style={{textAlign:'center'}}>Appointment has been set.</h5>
                     </div>
-                    <div className="my-2 container">
-                        <Link className="btn btn-primary" to="/service/new">Add Another Appointment</Link>
+                    <div className="my-2 container btn-group gap-2" style={{padding:'2px'}}>
+                        <button onClick={handleNewForm} className="btn btn-primary">Make Another Appointment</button>
+                        <button className="btn btn-info"><Link to="/service" style={{textDecoration: 'none', color: 'white'}}>All Appointments</Link></button>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className={formClass} id="create-appointment-form">
                 <div className="form-floating mb-3">
-                    <input value={formData.vin} onChange={handleFormChange} placeholder="vin" required type="number" name="vin" id="vin" className="form-control" />
+                    <input value={formData.vin} onChange={handleFormChange} placeholder="vin" required type="text" name="vin" id="vin" className="form-control" />
                     <label htmlFor="vin">VIN (Vehicle Identification Number)</label>
                 </div>
                 <div className="form-floating mb-3">
