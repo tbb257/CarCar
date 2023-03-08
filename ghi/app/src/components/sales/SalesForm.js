@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 function SalesForm() {
 //_______________________________________________________________________________________________________________________________________________________________________//
     //Create UseStates for Dropdown items
-    const [automobileList, autoList] = useState(['']);
-    const [sPersonList, salesPersonList] = useState(['']);
-    const [customersList, customerList] = useState(['']);
+    const [automobileList, setAutoList] = useState(['']);
+    const [salesPersonList, setSalesPersonList] = useState(['']);
+    const [customerList, setCustomerList] = useState(['']);
 
     //Fetch data for dropdown lists
     const fetchData = async () => {
@@ -22,13 +22,9 @@ function SalesForm() {
             const salesData = await salesResponse.json();
             const customerData = await customerResponse.json();
 
-            console.log(autoData)
-            console.log(salesData)
-            console.log(customerData)
-
-            autoList(autoData.autos)
-            salesPersonList(salesData.salesperson)
-            customerList(customerData.customers)
+            setAutoList(autoData.autos)
+            setSalesPersonList(salesData.salesperson)
+            setCustomerList(customerData.customers)
         }
 
     }
@@ -104,7 +100,7 @@ function SalesForm() {
                                 <option>Choose an Automobile</option>
                                 {automobileList.map(auto =>{
                                     return (
-                                        <option key={auto.href} value={auto.href}>
+                                        <option key={auto.vin} value={auto.vin}>
                                             {auto.vin}
                                         </option>
                                     );
@@ -114,9 +110,9 @@ function SalesForm() {
                         <div className="mb-3">
                             <select onChange={handlePersonChange} value={salesperson} required id="salesperson" name="salesperson" className="form-select">
                                 <option>Choose a Salesperson</option>
-                                {sPersonList.map(person =>{
+                                {salesPersonList.map(person =>{
                                     return (
-                                        <option key={person.employee_number} value={person.employee_number}>
+                                        <option key={person.employee_number} value={person.name}>
                                             {person.name}
                                         </option>
                                     );
@@ -126,9 +122,9 @@ function SalesForm() {
                         <div className="mb-3">
                             <select onChange={handleCustomerChange} value={customer} required id="customer" name="customer" className="form-select">
                                 <option>Choose a Customer</option>
-                                {customersList.map(customer =>{
+                                {customerList.map(customer =>{
                                     return (
-                                        <option key={customer.id} value={customer.id}>
+                                        <option key={customer.id} value={customer.name}>
                                             {customer.name}
                                         </option>
                                     );
