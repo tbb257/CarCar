@@ -41,8 +41,6 @@ function AppointmentList(props) {
             status: "CANCELLED"
         }
 
-        console.log(formData)
-
         const fetchConfig = {
             method: "PUT",
             body: JSON.stringify(formData),
@@ -56,7 +54,6 @@ function AppointmentList(props) {
         if (response.ok) {
             setAppointments((props.appointments).filter(appointment => appointment.status === "IN PROGRESS"))
             window.location.reload(true)
-            console.log("SUCCESS")
         }
     }
 
@@ -74,8 +71,6 @@ function AppointmentList(props) {
           technician: eArray[5],
           status: "FINISHED"
       }
-
-      console.log(formData)
 
       const fetchConfig = {
           method: "PUT",
