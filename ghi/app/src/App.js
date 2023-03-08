@@ -4,7 +4,7 @@ import Nav from './Nav';
 import CustomerForm from './components/sales/CustomerForm';
 import SalesList from './components/sales/SalesList';
 import SalesForm from './components/sales/SalesForm';
-import SalesPersonDetail from './components/sales/SalesPersonDetail';
+import SalesPersonList from './components/sales/SalesPersonList';
 import SalesPersonForm from './components/sales/SalesPersonForm';
 import ManufacturerList from './components/inventory/ManufacturerList';
 import ManufacturerForm from './components/inventory/ManufacturerForm';
@@ -41,7 +41,7 @@ function App(props) {
             <Route path="create" element={<SalesForm/>}/>
           </Route>
           <Route path="/salesperson">
-            <Route index element={<SalesPersonDetail/>}/>
+            <Route index element={<SalesPersonList/>}/>
             <Route path="create" element={<SalesPersonForm/>}/>
           </Route>
           <Route path="service">

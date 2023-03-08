@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-function SalesPersonDetail (props) {
+function SalesPersonList (props) {
 
     // Create UseState for Sales List
     const [salesRecords, setSalesRecord] = useState([]);
@@ -73,4 +73,4 @@ function SalesPersonDetail (props) {
 }
 
 
-export default SalesPersonDetail
+export default SalesPersonList
