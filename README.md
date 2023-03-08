@@ -3,14 +3,16 @@
 Team:
 
 * Shaun Ragasa - Services Microservice
-* Tahmid - Sales Microservice
+* Tahmid Baro Bhuiyan- Sales Microservice
 
 ## Design
 
 ## Service microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+Services contains the following models:
+[ManufacturerVO, VehicleModelVO, AutomobileVO, Technician, Status, ServiceAppointment]
+
+ManufacturerVO, VehicleModelVO, and AutomobileVO are polled with their Inventory Microservice model counterpart. This service specifically integrates with the inventory microservice through the interaction of the AutomobileVO and ServiceAppointment models. The ServiceAppointment VIP property's value is determined by whether the ServiceAppointment instance's VIN can be found within the list of all AutomobileVO instances (i.e., if an automobile was purchased through our own dealership and inventory, service appointments for that automobile are considered VIP).
 
 ## Sales microservice
 
