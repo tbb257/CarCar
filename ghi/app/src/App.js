@@ -14,6 +14,8 @@ import AutomobileList from './components/inventory/AutomobileList';
 import AutomobileForm from './components/inventory/AutomobileForm';
 import AppointmentForm from './components/service/AppointmentForm';
 import AppointmentList from './components/service/AppointmentList';
+import AppointmentHistory from './components/service/AppointmentHistory';
+import TechnicianForm from './components/service/TechnicianForm';
 
 
 function App(props) {
@@ -44,9 +46,11 @@ function App(props) {
             <Route index element={<SalesPersonList/>}/>
             <Route path="create" element={<SalesPersonForm/>}/>
           </Route>
+          <Route path="/technician/create" element={<TechnicianForm/>}/>
           <Route path="service">
             <Route index element={<AppointmentList appointments={props.service}/>}/>
             <Route path="create" element={<AppointmentForm/>}/>
+            <Route path="history" element={<AppointmentHistory appointments={props.service}/>}/>
           </Route>
         </Routes>
       </div>

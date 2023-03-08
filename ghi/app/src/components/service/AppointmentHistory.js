@@ -1,26 +1,14 @@
-// ! Need to fix filter capabilities to work for every category and only display appointments in progress.
-// ! Also finish cancel/finish button capabilities
+// ! Need to fix filter capabilities.
 
 import React, {useState, useEffect} from 'react';
 
-function AppointmentList(props) {
+function AppointmentHistory(props) {
     const [appointments, setAppointments] = useState([])
-    // const [technicians, setTechnicians] = useState([])
     const [filterTerm, setFilterTerm] = useState(" ")
     const [filterCategory, setFilterCategory] = useState("")
 
 
-    // const getData = async () => {
-    //   const response = await fetch("http://localhost:8080/api/technicians/")
-
-    //   if (response.ok) {
-    //       const data = await response.json()
-    //       setTechnicians(data.technicians);
-    //   }
-    // }
-
     useEffect(() => {
-      // getData();
       setAppointments(props.appointments);
     }, [])
 
@@ -65,30 +53,16 @@ function AppointmentList(props) {
         return date.toLocaleTimeString()
     }
 
-    const handleCancel = (e) => {
-      console.log('pass')
-    }
-
-    const handleFinish = (e) => {
-        console.log('pass')
-    }
-
     return (
       <>
         <div className="my-2 container" >
-          <h1 className="py-2" style={{textAlign:'center'}}>List of Service Appointments</h1>
+          <h1 className="py-2" style={{textAlign:'center'}}>VIN Service History</h1>
         </div>
         <hr/>
         <form id="appointment_filter">
           <div className="row">
             <select className="col-md-3" value={filterCategory} placeholder="Filter Category" onChange={handleFilterCategoryChange}>
-              <option value="">Filter Category</option>
-              <option value="vip">VIP</option>
-              <option value="customer_name">Customer Name</option>
-              <option value="date">Date</option>
-              <option value="time">Time</option>
-              <option value="technician">Technician Name</option>
-              <option value="reason">Reason</option>
+              <option value="vin">VIN</option>
             </select>
             <input className="col-md-9" onChange={handelFilterTermChange}></input>
           </div>
@@ -103,8 +77,6 @@ function AppointmentList(props) {
                 <th scope="col">Time</th>
                 <th scope="col">Technician</th>
                 <th scope="col">Reason</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -118,8 +90,6 @@ function AppointmentList(props) {
                   <td>{time(appointment.date,appointment.time)}</td>
                   <td>{appointment.technician.name}</td>
                   <td>{appointment.reason}</td>
-                  <td><button onClick={handleCancel} id={[appointment.id,]} value={appointment.href} className="btn btn-danger">Cancel</button></td>
-                  <td><button onClick={handleFinish} id={appointment.id} value={appointment.href} className="btn btn-success">Finish</button></td>
                 </tr>
               )
             })}
@@ -129,4 +99,4 @@ function AppointmentList(props) {
     )
 }
 
-export default AppointmentList;
+export default AppointmentHistory;

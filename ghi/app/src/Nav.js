@@ -51,6 +51,7 @@ function Nav() {
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <NavLink className="dropdown-item" to="service">List of Appointments</NavLink>
                 <NavLink className="dropdown-item" to="service/create/">Add an Appointment</NavLink>
+                <NavLink className="dropdown-item" to="service/history/">VIN Service History</NavLink>
               </div>
             </div>
           </li>
@@ -74,7 +75,7 @@ function Nav() {
                 Add
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <NavLink className="dropdown-item" to="/">Add a Technician</NavLink>
+                <NavLink className="dropdown-item" to="technician/create/">Add a Technician</NavLink>
                 <NavLink className="dropdown-item" to="salesperson/create/">Add a Sales Person</NavLink>
                 <NavLink className="dropdown-item" to="customers/create">Add a Customer</NavLink>
               </div>
