@@ -1,36 +1,23 @@
-// ! Need to fix filter capabilities.
-
 import React, {useState, useEffect} from 'react';
 
 function AppointmentHistory(props) {
     const [appointments, setAppointments] = useState([])
-    const [filterTerm, setFilterTerm] = useState(" ")
-    const [filterCategory, setFilterCategory] = useState("")
+    const [filterTerm, setFilterTerm] = useState("")
 
 
     useEffect(() => {
       setAppointments(props.appointments);
     }, [])
 
-    const handleFilterCategoryChange = (e) => {
-      setFilterCategory(e.target.value);
-    }
-
     const handelFilterTermChange = (e) => {
       setFilterTerm(e.target.value);
     }
 
     const appointmentsFiltered = () => {
-      if (filterTerm === " ") {
-        return appointments.filter((appointment) => appointment.status.name !== "IN PROGRESS")
+      if (filterTerm === "") {
+        return appointments
       } else {
-        return appointments.filter((appointment) => appointment[filterCategory].toLowerCase().includes(filterTerm.toLowerCase()));
-          // console.log(technicians["name"])
-          // if (filterCategory === "technician") {
-          //   return appointments.filter(() => technicians["name"].includes(filterTerm));
-          // } else {
-          //     return appointments.filter((appointment) => appointment[filterCategory].toLowerCase().includes(filterTerm.toLowerCase()));
-          // }
+        return appointments.filter((appointment) => appointment.vin.toLowerCase().includes(filterTerm.toLowerCase()));
       }
     }
 
@@ -61,12 +48,10 @@ function AppointmentHistory(props) {
         <hr/>
         <form id="appointment_filter">
           <div className="row">
-            <select className="col-md-3" value={filterCategory} placeholder="Filter Category" onChange={handleFilterCategoryChange}>
-              <option value="vin">VIN</option>
-            </select>
-            <input className="col-md-9" onChange={handelFilterTermChange}></input>
+            <input className="col-md-12" onChange={handelFilterTermChange} placeholder="Search by VIN"></input>
           </div>
         </form>
+        <hr/>
         <table className="table table-striped table-hover">
           <thead>
             <tr>

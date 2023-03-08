@@ -1,37 +1,15 @@
-// ! Need to fix filter capabilities to work for every category and only display appointments in progress.
-// ! Also finish cancel/finish button capabilities
-
 import React, {useState, useEffect} from 'react';
 
 function AppointmentList(props) {
     const [appointments, setAppointments] = useState([])
-    const [filterTerm, setFilterTerm] = useState(" ")
-    const [filterCategory, setFilterCategory] = useState("")
-
 
     useEffect(() => {
-      setAppointments(props.appointments);
+      setAppointments((props.appointments).filter(appointment => appointment.status === "IN PROGRESS"));
     }, [])
-
-    const handleFilterCategoryChange = (e) => {
-      setFilterCategory(e.target.value);
-    }
-
-    const handelFilterTermChange = (e) => {
-      setFilterTerm(e.target.value);
-    }
-
-    const appointmentsFiltered = () => {
-
-    }
-
-    for (let status of props.appointments) {
-      console.log(status.status)
-    }
 
     const vip = (value) => {
         if (value) {
-            return <td>&#9745;</td>
+            return <td className="table-sucess">&#9745;</td>
         } else {
             return <td>&#9744;</td>
         }
@@ -48,12 +26,71 @@ function AppointmentList(props) {
         return date.toLocaleTimeString()
     }
 
-    const handleCancel = (e) => {
-      console.log('pass')
+    const handleCancel = async (e) => {
+        const appointmentURL = `http://localhost:8080${e.target.value}`
+
+        const eArray = e.target.id.split(",")
+
+        const formData = {
+            vin: eArray[0],
+            customer_name: eArray[1],
+            reason: eArray[2],
+            date: eArray[3],
+            time: eArray[4],
+            technician: eArray[5],
+            status: "CANCELLED"
+        }
+
+        console.log(formData)
+
+        const fetchConfig = {
+            method: "PUT",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+
+        const response = await fetch(appointmentURL, fetchConfig);
+
+        if (response.ok) {
+            setAppointments((props.appointments).filter(appointment => appointment.status === "IN PROGRESS"))
+            window.location.reload(true)
+            console.log("SUCCESS")
+        }
     }
 
-    const handleFinish = (e) => {
-        console.log('pass')
+    const handleFinish = async (e) => {
+      const appointmentURL = `http://localhost:8080${e.target.value}`
+
+      const eArray = e.target.id.split(",")
+
+      const formData = {
+          vin: eArray[0],
+          customer_name: eArray[1],
+          reason: eArray[2],
+          date: eArray[3],
+          time: eArray[4],
+          technician: eArray[5],
+          status: "FINISHED"
+      }
+
+      console.log(formData)
+
+      const fetchConfig = {
+          method: "PUT",
+          body: JSON.stringify(formData),
+          headers: {
+              "Content-Type": "application/json"
+          }
+      };
+
+      const response = await fetch(appointmentURL, fetchConfig);
+
+      if (response.ok) {
+          setAppointments((props.appointments).filter(appointment => appointment.status === "IN PROGRESS"))
+          window.location.reload(true)
+      }
     }
 
     return (
@@ -87,8 +124,8 @@ function AppointmentList(props) {
                   <td>{time(appointment.date,appointment.time)}</td>
                   <td>{appointment.technician.name}</td>
                   <td>{appointment.reason}</td>
-                  <td><button onClick={handleCancel} id={[appointment.id,]} value={appointment.href} className="btn btn-danger">Cancel</button></td>
-                  <td><button onClick={handleFinish} id={appointment.id} value={appointment.href} className="btn btn-success">Finish</button></td>
+                  <td><button onClick={handleCancel} id={[appointment.vin, appointment.customer_name, appointment.reason, appointment.date, appointment.time, appointment.technician.employee_num]} value={appointment.href} className="btn btn-danger">Cancel</button></td>
+                  <td><button onClick={handleFinish} id={[appointment.vin, appointment.customer_name, appointment.reason, appointment.date, appointment.time, appointment.technician.employee_num]} value={appointment.href} className="btn btn-success">Finish</button></td>
                 </tr>
               )
             })}

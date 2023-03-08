@@ -104,7 +104,7 @@ class ServiceAppointment(models.Model):
         self.save()
 
     def cancel(self):
-        status = Status.objects.get(name="CANCELED")
+        status = Status.objects.get(name="CANCELLED")
         self.status = status
         self.save()
 

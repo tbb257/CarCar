@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function AppointmentForm() {
     const [technician, setTechnician] = useState([])
@@ -79,6 +79,12 @@ function AppointmentForm() {
         titleClass = "py-2 d-none"
     }
 
+    let navigate = useNavigate()
+    const routeChange = () => {
+        navigate("/service")
+        window.location.reload(true)
+    }
+
     return (
     <div className="my-5 container">
         <div className="row">
@@ -92,7 +98,7 @@ function AppointmentForm() {
                     </div>
                     <div className="my-2 container btn-group gap-2" style={{padding:'2px'}}>
                         <button onClick={handleNewForm} className="btn btn-primary">Make Another Appointment</button>
-                        <button className="btn btn-info"><Link to="/service" style={{textDecoration: 'none', color: 'white'}}>All Appointments</Link></button>
+                        <button onClick={routeChange} className="btn btn-info" style={{color: 'white'}}>All Appointments</button>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className={formClass} id="create-appointment-form">

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function AutomobileForm() {
     const [models, setModels] = useState([])
@@ -75,6 +75,12 @@ function AutomobileForm() {
         titleClass = "py-2 d-none"
     }
 
+    let navigate = useNavigate()
+    const routeChange = () => {
+        navigate("/automobiles")
+        window.location.reload(true)
+    }
+
     return (
     <div className="my-5 container">
         <div className="row">
@@ -88,7 +94,7 @@ function AutomobileForm() {
                     </div>
                     <div className="my-2 container btn-group gap-2" style={{padding:'2px'}}>
                         <button onClick={handleNewForm} className="btn btn-primary">Add Another Automobile</button>
-                        <button className="btn btn-info"><Link to="/automobiles" style={{textDecoration: 'none', color: 'white'}}>All Automobiles</Link></button>
+                        <button onClick={routeChange} className="btn btn-info" style={{color: 'white'}}>All Automobiles</button>
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className={formClass} id="create-automobile-form">
