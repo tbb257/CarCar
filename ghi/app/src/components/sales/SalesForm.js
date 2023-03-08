@@ -22,7 +22,17 @@ function SalesForm() {
             const salesData = await salesResponse.json();
             const customerData = await customerResponse.json();
 
-            setAutoList(autoData.autos)
+            const record = autoData.autos.map((auto) =>{
+                return{
+                    manufacturer: auto.model.manufacturer.name,
+                    model: auto.model.name,
+                    vin: auto.vin
+                };
+            });
+
+            console.log(autoData)
+
+            setAutoList(record)
             setSalesPersonList(salesData.salesperson)
             setCustomerList(customerData.customers)
         }
@@ -101,7 +111,7 @@ function SalesForm() {
                                 {automobileList.map(auto =>{
                                     return (
                                         <option key={auto.vin} value={auto.vin}>
-                                            {auto.vin}
+                                            {auto.manufacturer} - {auto.model} - {auto.vin}
                                         </option>
                                     );
                                 })}
