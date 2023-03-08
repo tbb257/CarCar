@@ -55,7 +55,7 @@ function SalesPersonList (props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {salesRecords.filter(transaction => transaction.salesperson.includes(filter)).map(transaction =>{
+                    {salesRecords.filter(transaction => transaction.salesperson.toUpperCase().includes(filter.toUpperCase())).map(transaction =>{
                         return (
                             <tr>
                                 <td>{transaction.salesperson}</td>

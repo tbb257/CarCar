@@ -5,22 +5,11 @@ import React, {useState, useEffect} from 'react';
 
 function AppointmentList(props) {
     const [appointments, setAppointments] = useState([])
-    // const [technicians, setTechnicians] = useState([])
     const [filterTerm, setFilterTerm] = useState(" ")
     const [filterCategory, setFilterCategory] = useState("")
 
 
-    // const getData = async () => {
-    //   const response = await fetch("http://localhost:8080/api/technicians/")
-
-    //   if (response.ok) {
-    //       const data = await response.json()
-    //       setTechnicians(data.technicians);
-    //   }
-    // }
-
     useEffect(() => {
-      // getData();
       setAppointments(props.appointments);
     }, [])
 
@@ -33,17 +22,11 @@ function AppointmentList(props) {
     }
 
     const appointmentsFiltered = () => {
-      if (filterTerm === " ") {
-        return appointments.filter((appointment) => appointment.status.name !== "IN PROGRESS")
-      } else {
-        return appointments.filter((appointment) => appointment[filterCategory].toLowerCase().includes(filterTerm.toLowerCase()));
-          // console.log(technicians["name"])
-          // if (filterCategory === "technician") {
-          //   return appointments.filter(() => technicians["name"].includes(filterTerm));
-          // } else {
-          //     return appointments.filter((appointment) => appointment[filterCategory].toLowerCase().includes(filterTerm.toLowerCase()));
-          // }
-      }
+
+    }
+
+    for (let status of props.appointments) {
+      console.log(status.status)
     }
 
     const vip = (value) => {
@@ -79,20 +62,6 @@ function AppointmentList(props) {
           <h1 className="py-2" style={{textAlign:'center'}}>List of Service Appointments</h1>
         </div>
         <hr/>
-        <form id="appointment_filter">
-          <div className="row">
-            <select className="col-md-3" value={filterCategory} placeholder="Filter Category" onChange={handleFilterCategoryChange}>
-              <option value="">Filter Category</option>
-              <option value="vip">VIP</option>
-              <option value="customer_name">Customer Name</option>
-              <option value="date">Date</option>
-              <option value="time">Time</option>
-              <option value="technician">Technician Name</option>
-              <option value="reason">Reason</option>
-            </select>
-            <input className="col-md-9" onChange={handelFilterTermChange}></input>
-          </div>
-        </form>
         <table className="table table-striped table-hover">
           <thead>
             <tr>
@@ -108,7 +77,7 @@ function AppointmentList(props) {
             </tr>
           </thead>
           <tbody>
-            {appointmentsFiltered().map(appointment => {
+            {appointments.map(appointment => {
               return (
                 <tr scope="row" key={appointment.href}>
                   {vip(appointment.vip)}
