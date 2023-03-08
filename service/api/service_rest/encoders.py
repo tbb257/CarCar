@@ -41,7 +41,16 @@ class StatusEncoder(ModelEncoder):
 
 class ServiceAppointmentEncoder(ModelEncoder):
     model = ServiceAppointment
-    properties = ["id", "vin", "customer_name", "reason", "date", "time", "technician"]
+    properties = [
+        "id",
+        "vin",
+        "customer_name",
+        "reason",
+        "date",
+        "time",
+        "technician",
+        "vip",
+    ]
 
     encoders = {"technician": TechnicianEncoder()}
 
