@@ -33,7 +33,6 @@ function SalesPersonForm(){
         const response = await fetch(salesPersonURL, fetchConfig)
         if (response.ok){
             const newSalesPerson = await response.json();
-            console.log(newSalesPerson)
 
             setName('');
             setNumber('');

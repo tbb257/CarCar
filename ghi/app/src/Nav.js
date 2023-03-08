@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
+
+
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -80,9 +82,10 @@ function Nav() {
                 <NavLink className="dropdown-item" to="customers/create">Add a Customer</NavLink>
               </div>
             </div>
-          </li>
+            </li>
           </ul>
         </div>
+
       </div>
     </nav>
   )

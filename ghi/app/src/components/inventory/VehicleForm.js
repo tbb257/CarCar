@@ -55,7 +55,6 @@ function VehicleForm(){
         const response = await fetch(vehicleUrl, fetchConfig);
         if (response.ok){
             const newVehicle = await response.json();
-            console.log(newVehicle);
 
             setVehicle('');
             setPicture('');

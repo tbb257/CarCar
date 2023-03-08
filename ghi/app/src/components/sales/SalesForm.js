@@ -88,7 +88,6 @@ function SalesForm() {
         const response = await fetch(salesRecordURL, fetchConfig);
         if (response.ok){
             const newSale = await response.json();
-            console.log(newSale)
 
             setAuto('');
             setPerson('');
