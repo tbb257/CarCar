@@ -65,8 +65,6 @@ function Nav() {
                 <NavLink className="dropdown-item" to="sales">List of Sales</NavLink>
                 <NavLink className="dropdown-item" to="sales/create/">Create a Sale Record</NavLink>
                 <NavLink className="dropdown-item" to="salesperson">View a Sales Person's History</NavLink>
-                <NavLink className="dropdown-item" to="customers/create/">Add a Potential Customer</NavLink>
-                <NavLink className="dropdown-item" to="salesperson/create/">Add a Sales Person</NavLink>
               </div>
             </div>
           </li>
