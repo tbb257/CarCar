@@ -30,8 +30,6 @@ function SalesForm() {
                 };
             });
 
-            console.log(autoData)
-
             setAutoList(record)
             setSalesPersonList(salesData.salesperson)
             setCustomerList(customerData.customers)

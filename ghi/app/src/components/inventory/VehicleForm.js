@@ -42,8 +42,6 @@ function VehicleForm(){
         data.picture_url = picture_url;
         data.manufacturer_id = manufacturer;
 
-        console.log(data)
-
         const vehicleUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
             method: 'post',

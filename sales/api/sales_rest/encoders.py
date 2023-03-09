@@ -1,5 +1,5 @@
 from common.json import ModelEncoder
-from .models import SalesPerson, Customer, ManufacturerVO, VehicleModelVO, AutomobileVO, SalesRecord
+from .models import SalesPerson, Customer, VehicleModelVO, AutomobileVO, SalesRecord
 
 
 class SalesPeopleEncoder(ModelEncoder):
