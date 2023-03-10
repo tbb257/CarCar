@@ -9,8 +9,19 @@ Team:
 
 ## Service microservice
 
+The bounded contexts for this microservice were the Inventory Context and the Services Context.
+
 Services contains the following models:
 [ManufacturerVO, VehicleModelVO, AutomobileVO, Technician, Status, ServiceAppointment]
+
+ManufacturerVO, VehicleModelVO, and AutomobileVO all had identical properties to the original model, except that their get_api_url method was replaced with an equivalent import_href property.
+
+Technician:
+  - employee_num was set to a positive integer field because employee numbers should only be positive. It also was set to unique=True because no two employees should share the same number.
+
+ServiceAppointment:
+  - vin was not set to unique=True because the same car can have several appointments. It was not a foreignkey to the AutomobileVO because automobiles from other dealerships can come for a service appointment.
+  - an "IN PROGRESS" status is given to every appointment on creation by default, but can be changed with the finish and cancel methods.
 
 ManufacturerVO, VehicleModelVO, and AutomobileVO are polled with their Inventory Microservice model counterpart. This service specifically integrates with the inventory microservice through the interaction of the AutomobileVO and ServiceAppointment models. The ServiceAppointment VIP property's value is determined by whether the ServiceAppointment instance's VIN can be found within the list of all AutomobileVO instances (i.e., if an automobile was purchased through our own dealership and inventory, service appointments for that automobile are considered VIP).
 
