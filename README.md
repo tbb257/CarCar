@@ -30,6 +30,13 @@ ManufacturerVO, VehicleModelVO, and AutomobileVO are polled with their Inventory
 Sales contains the following models:
 [SalesPerson, Customer, ManufacturerVO, VehicleModelVO, AutomobileVO, SalesRecord]
 
-The VO objects are populated automatically through the poll set up for the sales api, and are value objects of the parent models' instances, which are coming from the inventory database. These VO's are then used in conjunction with our SalesPerson, Customer and SalesRecord instances to create functional features on the front-end side, such as creating/showing sales, creating customers and salespeople, and filtering through sales by the respective salesperson.
+[ManufacturerVO, VehicleModelVO,  AutomobileVO]
+The following are not models with which we manually create instances. They inherit the properties of their parent model which exists within the Inventory microservice, and the instances are automatically created based on the poll set up, which regularly checks the database for new or revised instances of the three parent models.
 
-The front-end for creating salespeople, salesrecords and customers function by fetching to the URL path declared in the back-end and matching up the input provided on the front-end to verify that the attributes are compatible. Similarly, the list features consist of JSX that is automatically populated based on a fetch to the list of instances in the database.
+[SalesPerson,  Customer]
+The following are simple models that only contain the name of the individuals, as well as 1 or 2 elements that can be used to identify different customers or salespeople. They are mainly to be used in conjunction with the creation of salesrecords.
+
+[Sales Record]
+The following is a model that contains every instance of a transaction made between a SalesPerson and a Customer for the purchase of an AutomobileVO. VehicleModelVO and ManufacturerVO are not directly contained within each instance of a sales record, instead each instance of an AutomobileVO contains elements that are foreign keys to the two models.
+
+The primary features of this microservice's front-end are to create new sales records and display a list - while also allowing the possibility of filtering the displayed list by sales person. Additional features which compliment the primary features include adding new customers and salespeople, which can then be accessible via a drop-down bar when creating new sales. Since the Inventory microservice has its own feature which allows the users to create new automobiles, the drop-down menu for selecting the purchased automobile within the 'Create a Sales Record' feature automatically populates based on how many automobiles exist within the Inventory database due to the poll system.
