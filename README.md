@@ -1,5 +1,29 @@
 # CarCar
 
+Greetings!
+
+Welcome to our FullStack application, CarCar!
+
+This is a Service-side application meant to help organizations keep track of their appointments and transactions. This application utilizes a microservice system, meaning that the Service and Sales sides are separate of one another, with polling utilized to keep track of changes to the respective databases.
+
+SETUP Guide:
+1. After cloning (we recommend via HTTPS), please direct to an easily-accessible directory via your local terminal
+2. Clone the repository using the following command:
+  git clone https://gitlab.com/tbb257/CarCar.git
+3. CD into the repository directory
+4. Docker compose up
+5. Front-End shall be visible on localhost:3000
+6. Back-End shall be visible via open source applications such as Insomnia on the following ports:
+  localhost:8080 (Services)
+  localhost:8090 (Sales)
+  localhost:8100 (Inventory)
+
+* Please note that it can take time for the front-end to be visible on localhost:3000
+
+
+
+
+
 Team:
 
 * Shaun Ragasa - Services Microservice
